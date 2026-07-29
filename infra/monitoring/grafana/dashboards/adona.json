@@ -1,0 +1,91 @@
+{
+  "title": "A Dona Lingerie · Visão Geral",
+  "uid": "adona-geral",
+  "timezone": "Europe/Lisbon",
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Agendamentos hoje",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "sum(increase(adona_agendamentos_criados_total[24h]))", "legendFormat": "total" }
+      ],
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#b08d57" } } }
+    },
+    {
+      "type": "stat",
+      "title": "Requisições / s",
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 0 },
+      "targets": [{ "expr": "sum(rate(adona_http_requests_total[5m]))" }]
+    },
+    {
+      "type": "gauge",
+      "title": "Cache hit ratio",
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 0 },
+      "targets": [{ "expr": "adona_cache_hit_ratio" }],
+      "fieldConfig": { "defaults": { "min": 0, "max": 1, "unit": "percentunit" } }
+    },
+    {
+      "type": "stat",
+      "title": "Erros 5xx (%)",
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 0 },
+      "targets": [
+        {
+          "expr": "100 * sum(rate(adona_http_requests_total{status=~\"5..\"}[5m])) / sum(rate(adona_http_requests_total[5m]))"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1 },
+              { "color": "red", "value": 2 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Latência por rota (p50 · p95 · p99)",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 5 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(adona_http_request_duration_seconds_bucket[5m])) by (le, route))",
+          "legendFormat": "p50 {{route}}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(adona_http_request_duration_seconds_bucket[5m])) by (le, route))",
+          "legendFormat": "p95 {{route}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(adona_http_request_duration_seconds_bucket[5m])) by (le, route))",
+          "legendFormat": "p99 {{route}}"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+    {
+      "type": "piechart",
+      "title": "Agendamentos por formato",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 14 },
+      "targets": [
+        { "expr": "sum by (tipo) (increase(adona_agendamentos_criados_total[7d]))", "legendFormat": "{{tipo}}" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Memória e CPU do processo",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 14 },
+      "targets": [
+        { "expr": "process_resident_memory_bytes{service=\"adona-api\"}", "legendFormat": "RSS" },
+        { "expr": "rate(process_cpu_seconds_total{service=\"adona-api\"}[5m])", "legendFormat": "CPU" }
+      ]
+    }
+  ]
+}

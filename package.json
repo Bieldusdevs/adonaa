@@ -1,0 +1,50 @@
+{
+  "name": "a-dona-lingerie",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@10.8.2",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx lib/db/seed.ts"
+  },
+  "dependencies": {
+    "next": "15.5.22",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "three": "^0.180.0",
+    "@react-three/fiber": "^9.1.2",
+    "@react-three/drei": "^10.3.0",
+    "motion": "^12.23.0",
+    "gsap": "^3.13.0",
+    "@gsap/react": "^2.1.2",
+    "server-only": "^0.0.1",
+    "hono": "^4.6.14",
+    "zod": "^3.24.1",
+    "@hono/zod-validator": "^0.4.2",
+    "drizzle-orm": "^0.38.2",
+    "@neondatabase/serverless": "^0.10.4",
+    "postgres": "^3.4.5",
+    "@upstash/redis": "^1.34.3",
+    "@upstash/ratelimit": "^2.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.180.0",
+    "tailwindcss": "^4.1.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "typescript": "^5.7.2",
+    "drizzle-kit": "^0.30.1",
+    "tsx": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,48 @@
+COMO ENVIAR PARA O GITHUB
+=========================
+
+O erro "workspace:*" acontece porque o repositorio ainda tem o
+package.json ANTIGO. O upload do GitHub acrescenta ficheiros mas
+nunca apaga os que la estavam.
+
+
+PASSO 1 - Apagar o repositorio antigo
+   GitHub -> o seu repositorio -> Settings -> descer ate ao fim
+   -> Danger Zone -> Delete this repository
+
+
+PASSO 2 - Criar um novo, VAZIO
+   github.com/new
+   NAO marque "Add a README"
+   NAO adicione .gitignore nem licenca
+
+
+PASSO 3 - Arrastar os ficheiros
+   No repositorio vazio: "uploading an existing file"
+   Arraste TUDO o que esta DENTRO desta pasta
+   (o conteudo, nao a pasta em si)
+
+   Sao 54 ficheiros. Esta pasta ja esta limpa:
+   nao tem node_modules, .next, apps/, packages/ nem turbo.json
+
+
+PASSO 4 - Vercel
+   Se o projeto antigo existir, apague-o:
+     Settings -> Advanced -> Delete Project
+     (apaga so o projeto na Vercel, nao o repositorio)
+
+   Depois: vercel.com/new -> importar -> Deploy
+   Nao mexa em mais nada.
+
+
+PASSO 5 - Numero de WhatsApp
+   Settings -> Environment Variables
+     NEXT_PUBLIC_WHATSAPP = 351912345678
+   So digitos, com indicativo, sem +
+   Depois: Redeploy
+
+
+COMO SABER QUE FICOU BEM
+   Abra o package.json no GitHub.
+   Deve comecar por:  "next": "15.5.22"
+   Se disser "workspace:*", o ficheiro antigo ainda la esta.

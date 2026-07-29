@@ -1,0 +1,43 @@
+groups:
+  - name: adona-disponibilidade
+    rules:
+      - alert: ApiEmBaixo
+        expr: up{job="adona-api"} == 0
+        for: 2m
+        labels: { severidade: critica }
+        annotations:
+          summary: 'A API de A Dona Lingerie não responde'
+          description: 'O alvo {{ $labels.instance }} está inacessível há 2 minutos.'
+
+      - alert: LatenciaAlta
+        expr: histogram_quantile(0.95, sum(rate(adona_http_request_duration_seconds_bucket[5m])) by (le, route)) > 1
+        for: 5m
+        labels: { severidade: aviso }
+        annotations:
+          summary: 'p95 acima de 1s na rota {{ $labels.route }}'
+
+      - alert: TaxaDeErroElevada
+        expr: |
+          sum(rate(adona_http_requests_total{status=~"5.."}[5m]))
+          / sum(rate(adona_http_requests_total[5m])) > 0.02
+        for: 5m
+        labels: { severidade: critica }
+        annotations:
+          summary: 'Mais de 2% das requisições a devolver erro 5xx'
+
+  - name: adona-negocio
+    rules:
+      - alert: SemAgendamentos
+        expr: increase(adona_agendamentos_criados_total[6h]) == 0
+        for: 30m
+        labels: { severidade: aviso }
+        annotations:
+          summary: 'Nenhum agendamento nas últimas 6 horas'
+          description: 'Pode indicar uma falha silenciosa no formulário de marcação.'
+
+      - alert: CacheFrio
+        expr: adona_cache_hit_ratio < 0.6
+        for: 15m
+        labels: { severidade: aviso }
+        annotations:
+          summary: 'Taxa de acerto do Redis abaixo de 60%'

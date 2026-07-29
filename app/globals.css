@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ *
+ *  A Dona Lingerie — design tokens
+ *  Paleta quente e discreta: marfim, nude, seda e um bordeaux profundo.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-marfim: #faf6f1;
+  --color-linho: #f0e7dc;
+  --color-nude: #e4cfc2;
+  --color-rosa-seco: #d9b3a7;
+  --color-bordeaux: #5a1f2b;
+  --color-carvao: #201c1a;
+  --color-tinta: #14110f;
+  --color-dourado: #b08d57;
+
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-seda: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius-suave: 2px;
+}
+
+:root {
+  color-scheme: light;
+  --sombra-peca: 0 24px 60px -24px rgb(32 28 26 / 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-marfim);
+  color: var(--color-carvao);
+  font-family: var(--font-sans);
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+
+/* Tipografia da marca ------------------------------------------------ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.olho {                       /* eyebrow / kicker */
+  font-size: 0.6875rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-dourado);
+}
+
+/* Revelação de texto usada pelo GSAP SplitText -------------------------- */
+.reveal-linha {
+  display: block;
+  overflow: hidden;
+}
+.reveal-linha > span {
+  display: block;
+  will-change: transform;
+}
+
+/* Linha dourada que se desenha no hover -------------------------------- */
+.sublinhado {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.6s var(--ease-seda);
+}
+.sublinhado:hover {
+  background-size: 100% 1px;
+}
+
+/* Grão de filme muito subtil sobre as fotografias ----------------------- */
+.grao::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* Canvas 3D nunca deve roubar o scroll no telemóvel --------------------- */
+canvas {
+  touch-action: pan-y;
+  display: block;
+}
+
+/* Acessibilidade: respeitamos quem prefere menos movimento -------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: var(--color-nude);
+  color: var(--color-tinta);
+}

@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adona-api
+  labels: { app: adona-api }
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: adona-api }
+  template:
+    metadata:
+      labels: { app: adona-api }
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '3333'
+        prometheus.io/path: '/metrics'
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+        - name: api
+          image: ghcr.io/adona/api:latest
+          ports: [{ containerPort: 3333, name: http }]
+          envFrom:
+            - secretRef: { name: adona-secrets }
+          env:
+            - name: API_PORT
+              value: '3333'
+            - name: CORS_ORIGINS
+              value: https://adonalingerie.pt
+          resources:
+            requests: { cpu: 100m, memory: 192Mi }
+            limits:   { cpu: 600m, memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /ready, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: http }
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ['ALL'] }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adona-api
+  labels: { app: adona-api }
+spec:
+  selector: { app: adona-api }
+  ports: [{ port: 80, targetPort: 3333, name: http }]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adona
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/limit-rps: '30'
+    nginx.ingress.kubernetes.io/enable-brotli: 'true'
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [adonalingerie.pt, api.adonalingerie.pt]
+      secretName: adona-tls
+  rules:
+    - host: adonalingerie.pt
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend: { service: { name: adona-web, port: { number: 80 } } }
+    - host: api.adonalingerie.pt
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend: { service: { name: adona-api, port: { number: 80 } } }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: adona-api
+  labels: { release: prometheus }
+spec:
+  selector:
+    matchLabels: { app: adona-api }
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
