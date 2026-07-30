@@ -156,7 +156,7 @@ export function FormularioAgendamento() {
               ))}
             </div>
             <button type="button" onClick={() => setPasso(2)}
-              className="mt-10 bg-carvao px-10 py-4 text-sm tracking-[0.18em] text-marfim uppercase transition-colors hover:bg-bordeaux">
+              className="btn-acao mt-10">
               Continuar
             </button>
           </motion.fieldset>
@@ -199,7 +199,7 @@ export function FormularioAgendamento() {
             <div className="mt-10 flex gap-6">
               <button type="button" onClick={() => setPasso(1)} className="sublinhado text-sm tracking-[0.18em] uppercase">Voltar</button>
               <button type="button" disabled={!hora} onClick={() => setPasso(3)}
-                className="bg-carvao px-10 py-4 text-sm tracking-[0.18em] text-marfim uppercase transition-colors hover:bg-bordeaux disabled:opacity-30">
+                className="btn-acao disabled:opacity-30">
                 Continuar
               </button>
             </div>

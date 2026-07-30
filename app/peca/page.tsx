@@ -104,8 +104,8 @@ export default async function PaginaProduto({ searchParams }: Busca) {
           <div className="mt-10">
             <div className="mb-4 flex items-baseline justify-between">
               <p className="text-xs tracking-wider text-carvao/55 uppercase">Tamanho</p>
-              <Link href="/agendar" className="sublinhado text-xs text-bordeaux">
-                Não sei o meu tamanho
+              <Link href="/visita-em-casa" className="sublinhado text-xs text-terracota">
+                Não sei o meu tamanho — provo em casa
               </Link>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -126,7 +126,7 @@ export default async function PaginaProduto({ searchParams }: Busca) {
             </button>
             <Link
               href="/agendar"
-              className="border border-carvao/20 px-10 py-4 text-center text-sm tracking-[0.18em] uppercase transition-colors hover:border-carvao"
+              className="btn-acao w-full"
             >
               Provar em casa, sem compromisso
             </Link>

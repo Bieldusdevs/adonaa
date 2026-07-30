@@ -2,6 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Hero } from '@/components/sections/Hero';
 import { CartaoProduto } from '@/components/sections/CartaoProduto';
+import { FaixaServico } from '@/components/sections/FaixaServico';
+import { ComoEUmaVisita } from '@/components/sections/ComoEUmaVisita';
+import { VozDaCasa } from '@/components/sections/VozDaCasa';
+import { Testemunhos } from '@/components/sections/Testemunhos';
+import { Duvidas } from '@/components/sections/Duvidas';
 import { WhatsAppFlutuante, BotaoMarcarWhatsApp } from '@/components/ui/BotaoWhatsApp';
 import { obterDestaques } from '@/lib/api';
 
@@ -14,6 +19,10 @@ export default async function Homepage() {
   return (
     <main id="conteudo">
       <Hero />
+
+      {/* A faixa vem ANTES da coleção: quem chega sem saber o tamanho não
+          compra — leva o serviço. */}
+      <FaixaServico />
 
       {/* ------------------------- coleção em destaque ------------------------ */}
       <section className="mx-auto max-w-7xl px-6 py-28 lg:px-12">
@@ -35,6 +44,8 @@ export default async function Homepage() {
           ))}
         </div>
       </section>
+
+      <ComoEUmaVisita />
 
       {/* ---------------------------- os materiais ---------------------------- */}
       <section className="bg-linho/60 py-28">
@@ -117,7 +128,7 @@ export default async function Homepage() {
             <div className="mt-12 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/agendar"
-                className="inline-block bg-carvao px-10 py-4 text-center text-sm tracking-[0.18em] text-marfim uppercase transition-colors hover:bg-bordeaux"
+                className="btn-acao"
               >
                 Marcar a minha consulta
               </Link>
@@ -137,6 +148,10 @@ export default async function Homepage() {
         </div>
       </section>
 
+      <VozDaCasa />
+      <Testemunhos />
+      <Duvidas />
+
       {/* -------------------------------- rodapé ------------------------------ */}
       <footer className="bg-carvao py-20 text-marfim/80">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -149,15 +164,25 @@ export default async function Homepage() {
               </p>
             </div>
             {[
-              ['Casa', ['Coleção', 'Materiais', 'O ateliê', 'Prova em casa']],
-              ['Apoio', ['Guia de tamanhos', 'Cuidados', 'Trocas', 'Privacidade']],
+              ['Casa', [
+                ['Coleção', '/colecao'],
+                ['Materiais', '/#materiais'],
+                ['Prova em casa', '/visita-em-casa'],
+                ['Marcar visita', '/agendar'],
+              ]],
+              ['Apoio', [
+                ['Guia de tamanhos', '/visita-em-casa'],
+                ['Cuidados', '/#materiais'],
+                ['Trocas', '/#duvidas'],
+                ['Privacidade', '#'],
+              ]],
             ].map(([titulo, itens]) => (
               <nav key={titulo as string}>
                 <p className="olho mb-5">{titulo}</p>
                 <ul className="space-y-3 text-sm">
-                  {(itens as string[]).map((i) => (
-                    <li key={i}>
-                      <Link href="#" className="sublinhado">{i}</Link>
+                  {(itens as [string, string][]).map(([rotulo, href]) => (
+                    <li key={rotulo}>
+                      <Link href={href} className="sublinhado">{rotulo}</Link>
                     </li>
                   ))}
                 </ul>

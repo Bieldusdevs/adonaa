@@ -141,7 +141,7 @@ export function BotaoPartilhar({ titulo, descricao, url, preco, compacto = false
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full left-0 z-20 mt-3 w-60 border border-carvao/10 bg-marfim shadow-[0_20px_50px_-20px_rgba(32,28,26,.3)]"
+            className="absolute top-full left-0 z-20 mt-3 w-60 border border-carvao/10 bg-marfim shadow-[0_20px_50px_-20px_rgba(90,45,30,.3)]"
           >
             <a
               href={linkPartilhaLivre(`${texto}\n\n${url}\n\n_A Dona Lingerie_`)}
@@ -215,7 +215,7 @@ export function WhatsAppFlutuante({ produto }: { produto?: string }) {
                 initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 12 }}
-                className="hidden max-w-[15rem] bg-marfim px-5 py-3 text-xs leading-relaxed text-carvao/75 shadow-[0_18px_40px_-18px_rgba(32,28,26,.35)] sm:block"
+                className="hidden max-w-[15rem] bg-marfim px-5 py-3 text-xs leading-relaxed text-carvao/75 shadow-[0_18px_40px_-18px_rgba(90,45,30,.35)] sm:block"
               >
                 Prefere marcar por WhatsApp? Respondemos em minutos.
               </motion.p>

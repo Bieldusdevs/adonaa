@@ -42,8 +42,8 @@ export function Hero() {
           className="mt-10 max-w-lg text-lg leading-relaxed text-carvao/75"
         >
           Seda italiana, renda de Caudry e algodão Pima — escolhidos um a um.
-          E uma consultora que vai a sua casa, com as provas na mala, para que
-          nunca mais tenha de adivinhar o seu tamanho.
+          E a Ana, que vai a sua casa com as provas na mala, para que nunca
+          mais tenha de adivinhar o seu tamanho.
         </motion.p>
 
         <motion.div
@@ -54,7 +54,7 @@ export function Hero() {
         >
           <Link
             href="/agendar"
-            className="group relative inline-flex items-center justify-center overflow-hidden bg-carvao px-10 py-4 text-sm tracking-[0.18em] text-marfim uppercase transition-colors hover:bg-bordeaux"
+            className="btn-acao group relative overflow-hidden"
           >
             <span className="relative z-10">Marcar prova em casa</span>
           </Link>
