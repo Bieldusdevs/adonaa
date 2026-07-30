@@ -2,7 +2,7 @@
  * Dúvidas frequentes — as cinco perguntas que travam a decisão.
  *
  * Usa <details>/<summary> nativos: funcionam sem JavaScript, são
- * acessíveis por omissão e o browser trata da navegação por teclado.
+ * acessíveis por omissão e o navegador trata da navegação por teclado.
  * A animação vem do CSS em globals.css.
  *
  * O JSON-LD faz o Google mostrar estas respostas diretamente na pesquisa —
@@ -67,7 +67,7 @@ export function Duvidas() {
       <p className="mt-10 text-sm text-carvao/60">
         Ficou alguma por responder?{' '}
         <a href="/agendar" className="sublinhado text-terracota">
-          Pergunte-me diretamente
+          Me pergunte direto
         </a>
         .
       </p>

@@ -1,6 +1,6 @@
 # Fase 1 — concluída
 
-Redesenho da homepage e formalização do serviço de visita ao domicílio.
+Redesenho da homepage e formalização do serviço de visita em domicílio.
 Build validado: `✓ Compiled successfully`, 7 rotas.
 
 ---
@@ -51,7 +51,7 @@ estado de repouso.
 6. Voz da casa             ← NOVO
 7. Testemunhos             ← NOVO
 8. Dúvidas frequentes      ← NOVO
-9. Rodapé                  ligações reais
+9. Rodapé                  links reais
 ```
 
 **A faixa vem antes da coleção**, e é deliberado: quem chega ao site sem
@@ -60,7 +60,7 @@ respeita a ordem real da hesitação.
 
 ### Componentes novos
 
-| Ficheiro | Papel |
+| Arquivo | Papel |
 |---|---|
 | `FaixaServico.tsx` | Faixa pêssego com foto da Ana e CTA |
 | `ComoEUmaVisita.tsx` | 4 passos + 3 garantias |
@@ -72,7 +72,7 @@ respeita a ordem real da hesitação.
 ### Detalhes que valem a pena conhecer
 
 **O FAQ usa `<details>` nativo.** Funciona sem JavaScript, é acessível por
-omissão e o browser trata da navegação por teclado. A animação vem do CSS.
+omissão e o navegador trata da navegação por teclado. A animação vem do CSS.
 O JSON-LD faz o Google mostrar as respostas diretamente na pesquisa.
 
 **A foto da fundadora não tem animação.** É a única imagem estática do site.
@@ -89,7 +89,7 @@ da luz, do provador — nunca do corpo. É o princípio 2.2 do plano, e a secç�
 
 Hero, "como funciona", **"o que levo comigo"** (a secção que mais converte —
 ver a mala aberta transforma uma ideia abstrata em algo concreto), área de
-serviço com porta aberta para outras cidades, testemunhos e marcação dupla
+serviço com porta aberta para outras cidades, testemunhos e agendamento dupla
 (WhatsApp + formulário).
 
 Marcada com JSON-LD `Service`, preço `0` — o Google percebe que é gratuito.
@@ -123,6 +123,6 @@ da secção.
 ## Próxima fase
 
 **Fase 2 — Painel de gestão, núcleo** (2 a 3 semanas): autenticação com
-Argon2id, rota secreta, ecrã "Hoje", agenda de visitas e bloco de notas.
+Argon2id, rota secreta, tela "Hoje", agenda de visitas e bloco de notas.
 
 Ver `PLANO-EVOLUCAO.md`, secções 5 e 6.

@@ -4,15 +4,15 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { IconeWhatsApp } from '@/components/ui/BotaoWhatsApp';
 
-const CIDADES = ['Lisboa', 'Barreiro', 'Almada', 'Setúbal', 'Cascais', 'Porto'];
+const CIDADES = ['Belo Horizonte', 'Nova Lima', 'Contagem', 'Betim', 'Sabará', 'Santa Luzia'];
 const VERDE = '#25D366';
 
 /**
  * O caminho curto: nome, cidade, e a conversa abre.
  *
- * Muita gente não quer preencher morada e código postal antes de falar com
+ * Muita gente não quer preencher endereço e CEP antes de falar com
  * alguém. Este bloco regista a intenção (para a equipa saber de onde veio o
- * contacto e para medirmos a conversão) e entrega a conversa já escrita.
+ * contato e para medirmos a conversão) e entrega a conversa já escrita.
  * Os detalhes ficam para a consultora recolher no WhatsApp.
  */
 export function MarcacaoRapidaWhatsApp() {
@@ -32,7 +32,7 @@ export function MarcacaoRapidaWhatsApp() {
       const { whatsapp } = await res.json();
       window.open(whatsapp, '_blank', 'noopener,noreferrer');
     } catch {
-      // se a pré-reserva falhar, a conversa abre na mesma — nunca bloqueamos o contacto
+      // se a pré-reserva falhar, a conversa abre na mesma — nunca bloqueamos o contato
       const texto = encodeURIComponent(
         `Olá! Gostaria de marcar uma consulta.${nome ? `\n\nChamo-me *${nome}*.` : ''}${cidade ? `\nCidade: ${cidade}.` : ''}`,
       );
@@ -61,7 +61,7 @@ export function MarcacaoRapidaWhatsApp() {
       </div>
 
       <p className="mb-8 text-sm leading-relaxed text-carvao/70">
-        Diga-nos apenas o nome e a cidade. Levamos a conversa daí — sem
+        Me diga só o nome e a cidade. Levamos a conversa daí — sem
         formulários, sem esperar por e-mails.
       </p>
 

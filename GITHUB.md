@@ -2,12 +2,12 @@
 
 > **Já tem o repositório criado e o deploy falhou?**
 > Veja `RESOLVER-VERCEL.md` — o repositório provavelmente ficou com restos
-> da estrutura antiga, porque o upload web do GitHub acrescenta ficheiros
+> da estrutura antiga, porque o upload web do GitHub acrescenta arquivos
 > mas nunca apaga os que lá estavam.
 
 ## O que causava o "Something went really wrong"
 
-Não era o tamanho nem a ligação. O projeto tinha duas pastas cujos nomes o
+Não era o tamanho nem a link. O projeto tinha duas pastas cujos nomes o
 uploader web do GitHub **recusa processar**:
 
 ```
@@ -41,7 +41,7 @@ bonitos. Muda apenas o nome da pasta, que o GitHub agora aceita.
 2. Clique em **uploading an existing file**
 3. Arraste **o conteúdo** da pasta `a-dona-lingerie`
    (as pastas `app`, `components`, `lib`, `public`, `shaders`, `types`,
-   `infra` e os ficheiros soltos como `package.json`)
+   `infra` e os arquivos soltos como `package.json`)
 4. **Commit changes**
 
 > Não arraste `node_modules` nem `.next` — se existirem localmente, apague-os
@@ -55,19 +55,19 @@ cd a-dona-lingerie
 ```
 
 Substitui todo o conteúdo do repositório por esta pasta — é o que garante
-que não sobram ficheiros antigos. Verifica tudo antes de enviar e nunca
+que não sobram arquivos antigos. Verifica tudo antes de enviar e nunca
 inclui `node_modules`.
 
 ### C) GitHub Desktop, sem terminal
 
 **File → Add local repository** → escolher a pasta → **Publish repository**.
 
-### Se pedir palavra-passe
+### Se pedir senha
 
 O GitHub já não a aceita. Crie um token em
 [github.com/settings/tokens](https://github.com/settings/tokens) →
 **Generate new token (classic)** → marque **`repo`** → use-o no lugar da
-palavra-passe.
+senha.
 
 ---
 
@@ -84,8 +84,8 @@ deteta o Next sozinha.
 Sem base de dados configurada, nada rebenta:
 
 - a homepage e as peças mostram o catálogo de demonstração
-- o formulário de marcação abre e aceita pedidos
-- a marcação devolve a referência e a conversa de WhatsApp pronta
+- o formulário de agendamento abre e aceita pedidos
+- a agendamento devolve a referência e a conversa de WhatsApp pronta
 
 Isto é deliberado. Um site de marca não deve mostrar um erro só porque falta
 uma variável de ambiente.
@@ -95,7 +95,7 @@ uma variável de ambiente.
 **Settings → Environment Variables:**
 
 ```
-NEXT_PUBLIC_WHATSAPP = 351912345678
+NEXT_PUBLIC_WHATSAPP = 5531988887777
 ```
 
 Só dígitos, com indicativo, sem `+`. Depois faça **Redeploy**.
@@ -121,7 +121,7 @@ DATABASE_URL="a-sua-url" npm run db:seed
 No repositório deve ver, na raiz: `package.json`, `next.config.ts`,
 `tsconfig.json` e as pastas `app/`, `components/`, `lib/`, `public/`.
 
-Total: **64 ficheiros**. Se forem milhares, o `node_modules` entrou por
+Total: **64 arquivos**. Se forem milhares, o `node_modules` entrou por
 engano.
 
 ## Correr localmente

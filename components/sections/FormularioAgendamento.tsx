@@ -11,16 +11,16 @@ type Canal = 'email' | 'whatsapp';
 
 const TIPOS: { valor: Tipo; titulo: string; nota: string }[] = [
   { valor: 'domicilio', titulo: 'Em sua casa', nota: 'A consultora leva as provas. 90 minutos.' },
-  { valor: 'atelier', titulo: 'No nosso ateliê', nota: 'Lisboa, Príncipe Real. Café incluído.' },
+  { valor: 'atelier', titulo: 'No nosso ateliê', nota: 'Savassi, Belo Horizonte. Cafezinho incluído.' },
   { valor: 'video', titulo: 'Por vídeo', nota: 'Para uma primeira conversa, onde estiver.' },
 ];
 
 const VERDE = '#25D366';
 
 /**
- * Marcação em três passos, com dois canais de confirmação.
+ * Agendamento em três passos, com dois canais de confirmação.
  *
- * O WhatsApp não é um atalho que salta o registo: a marcação entra sempre na
+ * O WhatsApp não é um atalho que salta o registo: a agendamento entra sempre na
  * base de dados. O que muda é o fim — quem escolhe WhatsApp recebe uma
  * referência curta e a conversa já aberta, em vez de esperar por um e-mail.
  */
@@ -66,14 +66,14 @@ export function FormularioAgendamento() {
           telefone: fd.get('telefone'),
           endereco: fd.get('endereco') || undefined,
           cidade: fd.get('cidade') || undefined,
-          codigoPostal: fd.get('codigoPostal') || undefined,
+          cep: fd.get('cep') || undefined,
           observacoes: fd.get('observacoes') || undefined,
           consentimentoLgpd: fd.get('consentimento') === 'on',
         }),
       });
 
       const corpo = await res.json();
-      if (!res.ok) { setErro(corpo.erro ?? 'Não foi possível concluir a marcação.'); return; }
+      if (!res.ok) { setErro(corpo.erro ?? 'Não foi possível concluir a agendamento.'); return; }
 
       setResultado(corpo);
       setPasso(4);
@@ -96,7 +96,7 @@ export function FormularioAgendamento() {
         animate={{ opacity: 1, y: 0 }}
         className="border border-dourado/30 bg-linho/50 p-12 text-center"
       >
-        <p className="olho mb-4">Marcação recebida</p>
+        <p className="olho mb-4">Agendamento recebida</p>
         <h3 className="display mb-4 text-3xl">Até breve.</h3>
         <p className="mx-auto max-w-md leading-relaxed text-carvao/70">{resultado.mensagem}</p>
 
@@ -121,7 +121,7 @@ export function FormularioAgendamento() {
   return (
     <form onSubmit={enviar} className="mx-auto max-w-2xl">
       <ol className="mb-12 flex gap-8 text-xs tracking-[0.18em] uppercase">
-        {['Formato', 'Data', 'Contacto'].map((r, i) => (
+        {['Formato', 'Data', 'Contato'].map((r, i) => (
           <li key={r} className={`flex items-center gap-2 ${passo > i ? 'text-bordeaux' : 'text-carvao/35'}`}>
             <span className={`h-px w-8 ${passo > i ? 'bg-bordeaux' : 'bg-carvao/20'}`} />
             {r}
@@ -219,15 +219,15 @@ export function FormularioAgendamento() {
             <input name="nome" required placeholder="Nome completo" className={campo} />
             <div className="grid gap-6 sm:grid-cols-2">
               <input name="email" type="email" required placeholder="E-mail" className={campo} />
-              <input name="telefone" required placeholder="Telemóvel" className={campo} />
+              <input name="telefone" required placeholder="Celular" className={campo} />
             </div>
 
             {tipo === 'domicilio' && (
               <>
-                <input name="endereco" required placeholder="Morada" className={campo} />
+                <input name="endereco" required placeholder="Endereço" className={campo} />
                 <div className="grid gap-6 sm:grid-cols-2">
                   <input name="cidade" required placeholder="Cidade" className={campo} />
-                  <input name="codigoPostal" placeholder="Código postal" className={campo} />
+                  <input name="cep" placeholder="CEP" className={campo} />
                 </div>
               </>
             )}
@@ -261,8 +261,8 @@ export function FormularioAgendamento() {
 
             <label className="flex items-start gap-3 pt-2 text-xs leading-relaxed text-carvao/60">
               <input type="checkbox" name="consentimento" required className="mt-0.5 accent-[#5a1f2b]" />
-              Autorizo o contacto {canal === 'whatsapp' ? 'por WhatsApp ' : ''}e o tratamento dos meus dados para esta
-              marcação, nos termos da política de privacidade. As medidas ficam guardadas apenas com o meu consentimento.
+              Autorizo o contato {canal === 'whatsapp' ? 'por WhatsApp ' : ''}e o tratamento dos meus dados para esta
+              agendamento, nos termos da política de privacidade. As medidas ficam guardadas apenas com o meu consentimento.
             </label>
 
             {erro && <p className="border-l-2 border-bordeaux pl-4 text-sm text-bordeaux">{erro}</p>}
@@ -276,7 +276,7 @@ export function FormularioAgendamento() {
                   color: canal === 'whatsapp' ? '#fff' : '#faf6f1',
                 }}>
                 {canal === 'whatsapp' && <IconeWhatsApp className="h-4 w-4" />}
-                {enviando ? 'A confirmar…' : canal === 'whatsapp' ? 'Confirmar e abrir conversa' : 'Confirmar marcação'}
+                {enviando ? 'confirmando…' : canal === 'whatsapp' ? 'Confirmar e abrir conversa' : 'Confirmar agendamento'}
               </button>
             </div>
           </motion.fieldset>

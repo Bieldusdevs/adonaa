@@ -16,7 +16,7 @@ const novaConsulta = z.object({
   consentimentoLgpd: z.literal(true),
 });
 
-/** POST /consultas — dúvidas sobre tamanho, materiais ou encomendas especiais. */
+/** POST /consultas — dúvidas sobre tamanho, materiais ou pedidos especiais. */
 consultasRoute.post('/', zValidator('json', novaConsulta), async (c) => {
   const ip = c.req.header('x-forwarded-for')?.split(',')[0] ?? 'anon';
   const { success } = await limiteConsulta.limit(ip);

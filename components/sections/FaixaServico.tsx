@@ -27,7 +27,7 @@ export function FaixaServico() {
             Não sabe o seu tamanho? Eu vou aí.
           </span>
           <span className="mt-1 block text-sm text-carvao/65">
-            90 minutos, sem compromisso. Lisboa, Barreiro, Almada, Setúbal, Cascais e Porto.
+            90 minutos, sem compromisso. Belo Horizonte, Nova Lima, Contagem, Betim, Sabará e Santa Luzia.
           </span>
         </p>
 

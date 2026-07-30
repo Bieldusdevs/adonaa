@@ -6,10 +6,10 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import type { Produto } from '@/lib/db';
 import { BotaoPartilhar } from '@/components/ui/BotaoWhatsApp';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://adonalingerie.pt';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://adonalingerie.com.br';
 
 const euros = (cents: number) =>
-  new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' }).format(cents / 100);
+  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(cents / 100);
 
 /**
  * Cartão com inclinação 3D muito contida (máx. 6°).

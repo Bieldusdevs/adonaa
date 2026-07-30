@@ -39,7 +39,7 @@ const PASSOS = [
   {
     n: '03',
     titulo: 'A prova é sua',
-    texto: 'No seu quarto, ao seu espelho, com a sua luz. Não num provador frio de luz branca.',
+    texto: 'No seu quarto, no seu espelho, com a sua luz. Não num provador frio de luz branca.',
     icone: (
       <>
         <rect x="6" y="2.5" width="12" height="15" rx="6" />
@@ -74,7 +74,7 @@ export function ComoEUmaVisita() {
         <h2 className="display text-[clamp(2rem,4.5vw,3.5rem)]">Como é uma visita</h2>
         <p className="mt-6 leading-relaxed text-carvao/70">
           É mais simples do que parece — e não tem nada de constrangedor.
-          Aqui fica exatamente o que acontece, do primeiro contacto ao fim.
+          Aqui fica exatamente o que acontece, do primeiro contato ao fim.
         </p>
       </header>
 

@@ -8,12 +8,12 @@ import * as schema from './schema';
  * Duas estratégias, escolhidas pelo ambiente:
  *
  *  · Vercel (serverless) → driver HTTP da Neon. Sem pool a manter vivo entre
- *    invocações, que é o que evita esgotar as ligações do Postgres quando a
+ *    invocações, que é o que evita esgotar as links do Postgres quando a
  *    função escala.
  *  · Local / Docker / Kubernetes → postgres-js com pool tradicional.
  *
- * A ligação é preguiçosa (lazy): só se abre no primeiro acesso a `db`. Sem
- * isto, o simples facto de importar este módulo durante o build da Vercel
+ * A link é preguiçosa (lazy): só se abre no primeiro acesso a `db`. Sem
+ * isto, o simples fato de importar este módulo durante o build da Vercel
  * bastava para rebentar quando `DATABASE_URL` ainda não está definida.
  */
 
@@ -44,7 +44,7 @@ function criar(): Cliente {
       );
 }
 
-/** Proxy que adia a ligação até à primeira query. */
+/** Proxy que adia a link até à primeira query. */
 export const db = new Proxy({} as Cliente, {
   get(_alvo, prop) {
     _db ??= criar();

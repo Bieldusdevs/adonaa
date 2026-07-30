@@ -1,23 +1,39 @@
 /**
- * Utilitários de WhatsApp — partilha e marcação.
+ * Utilitários de WhatsApp — partilha e agendamento.
  *
- * Usamos exclusivamente `wa.me`, o deep link oficial: abre a app no telemóvel
+ * Usamos exclusivamente `wa.me`, o deep link oficial: abre a app no celular
  * e o WhatsApp Web no desktop, sem SDK, sem cookies de terceiros e sem
  * qualquer peso no bundle. A mensagem vai pré-escrita; a cliente carrega em
  * enviar. Nunca enviamos nada em nome dela.
  */
 
-/** Número da casa, só dígitos, com indicativo. Ex.: 351912345678 */
+/** Número da casa, só dígitos, com indicativo. Ex.: 5531988887777 */
 export const NUMERO_WHATSAPP =
-  process.env.NEXT_PUBLIC_WHATSAPP ?? '351912345678';
+  process.env.NEXT_PUBLIC_WHATSAPP ?? '5531988887777';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://adonalingerie.pt';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://adonalingerie.com.br';
 
-/** Normaliza qualquer formato de número para o que o wa.me aceita. */
+/** DDD padrão: 31 (Belo Horizonte e região metropolitana). */
+const DDD_PADRAO = process.env.NEXT_PUBLIC_DDD ?? '31';
+
+/**
+ * Normaliza qualquer formato brasileiro para o que o wa.me aceita.
+ *
+ * Aceita as formas que as clientes realmente escrevem:
+ *   (31) 98888-7777 · 31 98888 7777 · 988887777 · +55 31 98888-7777
+ */
 export function normalizarNumero(n: string) {
   const limpo = n.replace(/\D/g, '');
-  // um número português escrito sem indicativo (9 dígitos a começar por 9)
-  if (limpo.length === 9 && limpo.startsWith('9')) return `351${limpo}`;
+
+  // já vem com código do país
+  if (limpo.startsWith('55') && (limpo.length === 12 || limpo.length === 13)) return limpo;
+
+  // com DDD, sem país: celular 31988887777 (11) ou fixo 3133334444 (10)
+  if (limpo.length === 10 || limpo.length === 11) return `55${limpo}`;
+
+  // só o número local: 988887777 (9) ou 33334444 (8)
+  if (limpo.length === 8 || limpo.length === 9) return `55${DDD_PADRAO}${limpo}`;
+
   return limpo;
 }
 
@@ -64,14 +80,14 @@ export function linkPartilhaPagina(titulo: string, url = SITE) {
 
 /**
  * Link "enviar para uma amiga" sem destinatário fixo — o WhatsApp abre o
- * seletor de contactos. É o que faz sentido para partilha real.
+ * seletor de contatos. É o que faz sentido para partilha real.
  */
 export function linkPartilhaLivre(texto: string) {
   return `https://wa.me/?text=${encodeURIComponent(texto)}`;
 }
 
 /* ------------------------------------------------------------------ *
- *  Marcação por WhatsApp
+ *  Agendamento por WhatsApp
  * ------------------------------------------------------------------ */
 
 export type PedidoWhatsApp = {
@@ -94,11 +110,11 @@ function dataPorExtenso(iso?: string) {
   if (!iso) return null;
   const d = new Date(`${iso}T12:00:00`);
   if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString('pt-PT', { weekday: 'long', day: 'numeric', month: 'long' });
+  return d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
 /**
- * Mensagem de marcação. Estruturada para a consultora conseguir responder
+ * Mensagem de agendamento. Estruturada para a consultora conseguir responder
  * numa só mensagem, sem ter de fazer cinco perguntas de seguimento.
  */
 export function linkMarcacao(p: PedidoWhatsApp = {}) {
@@ -129,7 +145,7 @@ export function linkDuvidaProduto(nomeProduto: string, url: string) {
   );
 }
 
-/** Dúvida de tamanho — o motivo de contacto mais comum. */
+/** Dúvida de tamanho — o motivo de contato mais comum. */
 export function linkDuvidaTamanho(nomeProduto?: string) {
   const alvo = nomeProduto ? ` para a peça *${nomeProduto}*` : '';
   return link(

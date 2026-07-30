@@ -25,7 +25,7 @@ export function IconeWhatsApp({ className = 'h-4 w-4', ...props }: PropsIcone) {
 const VERDE = '#25D366';
 
 /* ------------------------------------------------------------------ *
- *  Botão de marcação por WhatsApp
+ *  Botão de agendamento por WhatsApp
  * ------------------------------------------------------------------ */
 type PropsMarcacao = {
   nome?: string;
@@ -84,7 +84,7 @@ export function BotaoPartilhar({ titulo, descricao, url, preco, compacto = false
   const [aberto, setAberto] = useState(false);
 
   useEffect(() => {
-    // no telemóvel a folha nativa é sempre melhor do que um menu nosso
+    // no celular a folha nativa é sempre melhor do que um menu nosso
     setTemNativo(typeof navigator !== 'undefined' && !!navigator.share);
   }, []);
 
@@ -161,7 +161,7 @@ export function BotaoPartilhar({ titulo, descricao, url, preco, compacto = false
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="h-4 w-4" aria-hidden>
                 <rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />
               </svg>
-              {copiado ? 'Ligação copiada' : 'Copiar ligação'}
+              {copiado ? 'Link copiada' : 'Copiar link'}
             </button>
           </motion.div>
         )}

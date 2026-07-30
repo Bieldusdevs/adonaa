@@ -23,7 +23,7 @@ async function main() {
         cuidados: 'Lavar à mão em água fria com sabão neutro. Secar à sombra, sem torcer.',
         certificacoes: ['OEKO-TEX® Standard 100', 'Seda tingida sem metais pesados'],
         descricao:
-          'Fio longo, contínuo e uniforme. Termorreguladora por natureza: refresca no verão e conserva o calor no inverno. O brilho é suave, nunca brilhante em excesso — é a luz que se assenta sobre a pele.',
+          'Fio longo, contínuo e uniforme. Termorreguladora por natureza: refresca no verão e conserva o calor no inverno. O brilho é suave, nunca brilhante em excesso — é a luz que se cai sobre a pele.',
       },
       {
         slug: 'renda-chantilly',
@@ -80,9 +80,9 @@ async function main() {
         slug: 'conjunto-aurora-seda',
         nome: 'Conjunto Aurora',
         colecao: 'Alvorada',
-        resumo: 'Soutien sem aro e caleçon em seda amoreira com acabamento em renda Chantilly.',
+        resumo: 'Sutiã sem aro e calcinha em seda amoreira com acabamento em renda Chantilly.',
         descricao:
-          'Cortado em viés para acompanhar o movimento do corpo. O soutien dispensa aro: a sustentação vem da modelagem em três painéis e de uma faixa inferior larga e macia. Sem etiquetas — a numeração é impressa a laser no interior.',
+          'Cortado em viés para acompanhar o movimento do corpo. O sutiã dispensa aro: a sustentação vem da modelagem em três painéis e de uma faixa inferior larga e macia. Sem etiquetas — a numeração é impressa a laser no interior.',
         historia:
           'Nasceu de um pedido: uma cliente queria uma peça que pudesse usar sob um vestido de casamento e continuar a usar dez anos depois.',
         precoCents: 24900,

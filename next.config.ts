@@ -30,7 +30,7 @@ const config: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [400, 640, 828, 1080, 1200, 1920, 2560],
-    remotePatterns: [{ protocol: 'https', hostname: 'cdn.adonalingerie.pt' }],
+    remotePatterns: [{ protocol: 'https', hostname: 'cdn.adonalingerie.com.br' }],
     minimumCacheTTL: 31536000,
   },
 
@@ -45,6 +45,8 @@ const config: NextConfig = {
   async rewrites() {
     return [
       { source: '/colecao/:slug', destination: '/peca?ref=:slug' },
+      // ficha de pedido no painel — mesma razão: evitar pastas [id]
+      { source: '/painel/pedidos/:id', destination: '/painel/pedidos/ficha?ref=:id' },
       // o cron tem a sua própria rota; tudo o resto vai para o Hono
       { source: '/api/health', destination: '/api/hono' },
       { source: '/api/produtos', destination: '/api/hono' },

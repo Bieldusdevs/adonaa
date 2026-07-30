@@ -16,7 +16,7 @@ domicílio.
 1. [Ponto de partida](#1-ponto-de-partida)
 2. [Princípios que orientam as decisões](#2-princípios-que-orientam-as-decisões)
 3. [Redesenho da homepage](#3-redesenho-da-homepage)
-4. [Serviço de visita ao domicílio](#4-serviço-de-visita-ao-domicílio)
+4. [Serviço de visita em domicílio](#4-serviço-de-visita-ao-domicílio)
 5. [Painel de gestão: segurança e acesso](#5-painel-de-gestão-segurança-e-acesso)
 6. [Painel de gestão: funcionalidades](#6-painel-de-gestão-funcionalidades)
 7. [Modelo de dados](#7-modelo-de-dados)
@@ -33,16 +33,16 @@ O que já existe e funciona:
 |---|---|
 | Homepage | Hero com shader de seda, 3 peças em destaque, secção de materiais, secção do serviço |
 | Página de peça | `/colecao/<slug>` com ficha técnica de materiais |
-| Marcação | `/agendar` — formulário de 3 passos + atalho por WhatsApp |
+| Agendamento | `/agendar` — formulário de 3 passos + atalho por WhatsApp |
 | API | Hono em `/api` — produtos, agendamentos, consultas |
 | Base de dados | 6 tabelas: `materiais`, `produtos`, `produto_materiais`, `clientes`, `consultas`, `agendamentos` |
-| WhatsApp | Partilha de peças, marcação, dúvidas de tamanho |
+| WhatsApp | Partilha de peças, agendamento, dúvidas de tamanho |
 
 O que falta, e é o objecto deste plano:
 
 - A homepage está **elegante mas fria**. Comunica qualidade; comunica pouco
   acolhimento.
-- O serviço de visita ao domicílio — a maior vantagem competitiva da casa —
+- O serviço de visita em domicílio — a maior vantagem competitiva da casa —
   aparece a meio da página, sem destaque próprio.
 - **Não existe painel de gestão.** Todos os pedidos chegam por e-mail ou
   WhatsApp e vivem na cabeça da vendedora.
@@ -125,7 +125,7 @@ AA**, que exige 4.5:1. Escurecido para `#a85940`, obtém-se:
 | Terracota sobre fundo marfim | 4.72:1 | ✅ |
 
 Continua visivelmente quente e é legível para quem tem baixa visão ou está
-ao sol num telemóvel. Vale a pena verificar qualquer cor nova com um
+ao sol num celular. Vale a pena verificar qualquer cor nova com um
 calculador de contraste antes de a adoptar — a diferença entre `#c07456` e
 `#a85940` é quase impercetível a olho e decisiva em acessibilidade.
 
@@ -148,8 +148,8 @@ Cormorant Garamond + Inter mantêm-se. Dois ajustes:
 │  1. HERO                                    [mantém]   │
 │     Shader de seda + "A peça certa não se compra"      │
 │     ▸ CTA agora em terracota                           │
-│     ▸ Sub-linha nova: "Ana atende em Lisboa,           │
-│       Barreiro e Almada — e vai a sua casa."           │
+│     ▸ Sub-linha nova: "Ana atende em Belo Horizonte,           │
+│       Nova Lima e Contagem — e vai sua casa."           │
 ├────────────────────────────────────────────────────────┤
 │  2. ⭐ FAIXA DO SERVIÇO                       [NOVO]    │
 │     Fundo pêssego, altura contida (~120px)             │
@@ -199,7 +199,7 @@ constrangimento.
  Conversa    Ela chega    A prova     Sem pressa
  de 5 min    discreta     no seu       Se não levar
  por WhatsApp  Mala neutra, quarto      nada, leva
- antes        sem marca    à sua luz,   as medidas
+ antes        sem marca    na sua luz,   as medidas
                            seu espelho  certas
 ```
 
@@ -216,9 +216,9 @@ Duas colunas. À esquerda, fotografia da vendedora — **de trabalho, não de
 estúdio**: a medir, a dobrar tecido, no ateliê. À direita, texto curto na
 primeira pessoa:
 
-> *"Comecei porque me fartei de ver mulheres a usar o tamanho errado e a
+> *"Comecei porque me cansei de ver mulheres a usar o tamanho errado e a
 > acharem que o problema eram elas. Não é. É do provador com luz branca e da
-> pressa. Por isso vou a sua casa: ao seu espelho, à sua luz, no seu tempo."*
+> pressa. Por isso vou sua casa: no seu espelho, na sua luz, no seu tempo."*
 >
 > — **Ana**, fundadora
 
@@ -255,7 +255,7 @@ Tudo respeita `prefers-reduced-motion`, como já acontece.
 
 ---
 
-## 4. Serviço de visita ao domicílio
+## 4. Serviço de visita em domicílio
 
 ### 4.1 Página dedicada `/visita-em-casa`
 
@@ -267,29 +267,29 @@ página própria: é o que a distingue de qualquer loja online.
 ├── Hero          Foto de uma consulta real (mãos, fita métrica, tecido)
 │                 "Noventa minutos. O seu espelho. O seu tempo."
 ├── Como funciona Os 4 passos, versão longa
-├── Onde vou      Mapa simples: Lisboa · Barreiro · Almada · Setúbal ·
-│                 Cascais · Porto (+ "não está na lista? pergunte")
+├── Onde vou      Mapa simples: Belo Horizonte · Nova Lima · Contagem · Betim ·
+│                 Sabará · Santa Luzia (+ "não está na lista? pergunte")
 ├── O que levo    Fotografia da mala aberta — 20 a 30 peças, todos os
 │                 tamanhos da grelha, fita métrica, espelho dobrável
 ├── Preço         Em destaque: GRATUITO. Sem asterisco.
 ├── Testemunhos   2 de clientes que usaram o serviço
 ├── FAQ           4 perguntas específicas da visita
-└── Marcação      Formulário + WhatsApp (componentes já existentes)
+└── Agendamento      Formulário + WhatsApp (componentes já existentes)
 ```
 
 **"O que levo" é a secção que mais converte.** Ver a mala aberta transforma
 uma ideia abstracta em algo concreto. Reduz a ansiedade de não saber o que
 esperar.
 
-### 4.2 Melhorias no fluxo de marcação
+### 4.2 Melhorias no fluxo de agendamento
 
 O formulário de 3 passos funciona. Quatro acrescentos:
 
-**a) Validação de área de serviço.** Ao escrever o código postal, verificar
+**a) Validação de área de serviço.** Ao escrever o CEP, verificar
 se está numa zona atendida. Se não estiver, não bloquear — oferecer:
 
-> *"Ainda não vou regularmente a Coimbra, mas se juntar duas ou três amigas,
-> vale a viagem. Fale comigo."* [WhatsApp]
+> *"Ainda não vou regularmente a Juiz de Fora, mas se juntar duas ou três amigas,
+> vale a viagem. Me chama."* [WhatsApp]
 
 Um "não" que abre uma porta em vez de fechar.
 
@@ -298,7 +298,7 @@ Aumenta o valor médio por deslocação e é a forma mais natural de crescer por
 recomendação. Duração passa a 150 min.
 
 **c) Lembrete honesto.** 24h antes, mensagem preparada no painel (envio
-manual, ver 6.2): confirmação, morada, e *"se precisar de remarcar, diga —
+manual, ver 6.2): confirmação, endereço, e *"se precisar de remarcar, diga —
 sem problema nenhum"*.
 
 **d) Seguimento pós-visita.** 48h depois, a vendedora vê no painel uma
@@ -310,7 +310,7 @@ sugestão de mensagem. Não automática: a decisão de contactar é dela.
 |---|---|
 | Homepage | Faixa (secção 2) + secção completa (4) |
 | Página de peça | "Não sabe o seu tamanho? Provo em sua casa" junto ao selector de tamanhos |
-| Rodapé (todas) | Ligação permanente |
+| Rodapé (todas) | Link permanente |
 | Botão flutuante | Já existe — passa a ligar a `/visita-em-casa` |
 
 ---
@@ -323,8 +323,8 @@ O pedido é um painel acessível por URL secreta. Vamos fazê-lo, **com uma
 ressalva importante e uma camada extra**.
 
 **URL secreta não é segurança.** É ofuscação. URLs vazam por: histórico do
-browser, cabeçalho `Referer`, extensões, logs de proxy, alguém a olhar para o
-ecrã. Um painel protegido *apenas* por URL secreta é um painel público que
+navegador, cabeçalho `Referer`, extensões, logs de proxy, alguém a olhar para o
+tela. Um painel protegido *apenas* por URL secreta é um painel público que
 ainda ninguém encontrou.
 
 **A abordagem:**
@@ -332,13 +332,13 @@ ainda ninguém encontrou.
 ```
 Camada 1  URL não-óbvia         /gestao-ad-2f9k          ← ofuscação
 Camada 2  Bloqueio de robôs     noindex + robots.txt     ← invisibilidade
-Camada 3  Login real            e-mail + palavra-passe   ← segurança
+Camada 3  Login real            e-mail + senha   ← segurança
 Camada 4  Sessão assinada       cookie httpOnly, 8h      ← persistência
 Camada 5  Trava de tentativas   5 falhas → 15 min        ← anti-força-bruta
 ```
 
 A URL secreta dá o que se pretende: ninguém tropeça no painel. O login é o
-que o protege de facto.
+que o protege de fato.
 
 ### 5.2 Autenticação
 
@@ -376,8 +376,8 @@ inexistente** — mesmo HTML, mesmo tempo de resposta.
 | 2FA por TOTP *(fase 2)* | Se o painel passar a gerir pagamentos |
 
 **Sobre 2FA:** proposto para a fase 2, não a fase 1. Numa operação de uma
-pessoa, o risco de ela perder o telemóvel e ficar fora do próprio negócio é
-maior do que o risco de invasão. Quando houver segunda utilizadora, passa a
+pessoa, o risco de ela perder o celular e ficar fora do próprio negócio é
+maior do que o risco de invasão. Quando houver segunda usuária, passa a
 obrigatório.
 
 ---
@@ -388,8 +388,8 @@ obrigatório.
 
 ```
 /gestao-ad-2f9k
-├── /                    Hoje          ← ecrã inicial
-├── /pedidos             Encomendas
+├── /                    Hoje          ← tela inicial
+├── /pedidos             Pedidos
 ├── /visitas             Agenda de visitas
 ├── /clientes            Ficha de clientes
 ├── /notas               Bloco de notas
@@ -398,11 +398,11 @@ obrigatório.
 └── /definicoes          Conta e preferências
 ```
 
-**Layout:** barra lateral fixa (recolhida em ecrã pequeno), conteúdo à
+**Layout:** barra lateral fixa (recolhida em tela pequeno), conteúdo à
 direita. A mesma paleta do site, um pouco mais densa — é ferramenta de
-trabalho, não montra.
+trabalho, não vitrine.
 
-### 6.2 Ecrã "Hoje" — o mais importante
+### 6.2 Tela "Hoje" — o mais importante
 
 Abre respondendo a *"o que tenho de fazer agora?"*.
 
@@ -411,26 +411,26 @@ Abre respondendo a *"o que tenho de fazer agora?"*.
 │  Bom dia, Ana.                        terça, 29 de julho │
 │                                                          │
 │  ┌─ PRECISA DE SI ─────────────────────────────────────┐ │
-│  │ ⚠ 2 marcações por confirmar    há 3h e há 5h        │ │
-│  │ ⚠ 1 encomenda por enviar       desde ontem          │ │
+│  │ ⚠ 2 agendamentos por confirmar    há 3h e há 5h        │ │
+│  │ ⚠ 1 pedido por enviar       desde ontem          │ │
 │  │ ○ 3 mensagens sem resposta                          │ │
 │  └─────────────────────────────────────────────────────┘ │
 │                                                          │
 │  ┌─ HOJE ──────────────────────────────────────────────┐ │
-│  │ 15:30  Marta Sousa · Barreiro · prova em casa       │ │
+│  │ 15:30  Marta Sousa · Nova Lima · prova em casa       │ │
 │  │        Rua X, 12 — 2.º Esq        [Ver] [WhatsApp]  │ │
 │  │ 18:30  Rita Alves · vídeo                           │ │
 │  └─────────────────────────────────────────────────────┘ │
 │                                                          │
-│  Semana: 4 visitas · 7 encomendas · 1.240 €              │
+│  Semana: 4 visitas · 7 pedidos · 1.240 €              │
 └──────────────────────────────────────────────────────────┘
 ```
 
-**"Precisa de si" ordena por urgência, não por data.** Uma marcação sem
-resposta há 5 horas está acima de uma encomenda de ontem — a cliente está à
+**"Precisa de si" ordena por urgência, não por data.** Uma agendamento sem
+resposta há 5 horas está acima de uma pedido de ontem — a cliente está à
 espera agora.
 
-### 6.3 Gestão de encomendas
+### 6.3 Gestão de pedidos
 
 **Estados:** `nova` → `confirmada` → `preparada` → `enviada` → `entregue`
 (+ `devolvida`, `cancelada`)
@@ -438,7 +438,7 @@ espera agora.
 **Vista:** tabela com filtros rápidos por estado. Colunas: referência,
 cliente, peças, valor, estado, data. Ordenável.
 
-**Ficha de encomenda:**
+**Ficha de pedido:**
 - Dados da cliente e histórico
 - Peças, tamanhos e cores
 - Linha do tempo de estados, com autor e hora
@@ -449,7 +449,7 @@ cliente, peças, valor, estado, data. Ordenável.
 contabilidade.
 
 **Ponto importante — mensagens não são automáticas.** O painel *prepara* a
-mensagem e abre o WhatsApp; quem carrega em enviar é a vendedora. Numa marca
+mensagem e abre o WhatsApp; quem clica em enviar é a vendedora. Numa marca
 que vive de proximidade, uma mensagem automática detectável custa mais do que
 poupa. Reduz-se o trabalho, não se remove a pessoa.
 
@@ -457,7 +457,7 @@ poupa. Reduz-se o trabalho, não se remove a pessoa.
 
 Duas vistas: **calendário** (semana/mês) e **lista** (próximas primeiro).
 
-Cada visita mostra: hora, duração, cliente, tipo, morada com ligação para o
+Cada visita mostra: hora, duração, cliente, tipo, endereço com link para o
 mapa, observações, estado.
 
 **Detalhes práticos:**
@@ -479,7 +479,7 @@ organizar.
 - Etiquetas coloridas: *cliente*, *fornecedor*, *ideia*, *urgente*
 - Pesquisa por texto
 - Lista de tarefas dentro de cada nota (caixas de selecção)
-- Ligar uma nota a uma cliente ou encomenda
+- Ligar uma nota a uma cliente ou pedido
 - Guardar automático, 2 segundos após parar de escrever
 
 **Sem editor rico.** Negritos e cores são fricção. Markdown leve
@@ -490,7 +490,7 @@ organizar.
 Cinco números no topo, com comparação ao período anterior:
 
 ```
-Receita        Encomendas     Ticket médio    Visitas    Conversão
+Receita        Pedidos     Ticket médio    Visitas    Conversão
 2.480 €        14             177 €           6          67%
 ↑ 18%          ↑ 3            ↑ 5%            = 6        ↑ 4pp
 ```
@@ -524,7 +524,7 @@ são ruído. Só entram sugestões **derivadas dos dados reais**.
 | Cliente sem compra há 90 dias | *"A Marta comprou há 3 meses. As clientes costumam repor a esta altura."* [mensagem preparada] |
 | Visita sem compra há 7 dias | *"A Rita provou o Aurora e não levou. Vale um seguimento discreto?"* |
 | Peça com muitas visualizações e poucas vendas | *"O Noturno é o mais visto e o menos comprado. Preço? Fotografia? Tamanhos em falta?"* |
-| Concentração geográfica | *"4 clientes no Barreiro. Vale um dia dedicado?"* |
+| Concentração geográfica | *"4 clientes no Nova Lima. Vale um dia dedicado?"* |
 | Aniversário de cliente | *"A Sofia faz anos na quinta."* |
 
 **b) Programa de recomendação**
@@ -567,59 +567,59 @@ sente mas não consegue provar.
 Tabelas novas a acrescentar ao schema Drizzle existente:
 
 ```
-utilizadores          Acesso ao painel
+usuários          Acesso ao painel
 ├── id, email, nomeCompleto
-├── palavraPasseHash  (Argon2id)
+├── senhaHash  (Argon2id)
 ├── papel             admin | consultora
 ├── ultimoAcessoEm, ativo
 
 sessoes_admin         Sessões e auditoria
-├── id, utilizadorId, tokenHash
+├── id, usuárioId, tokenHash
 ├── ip, userAgent, expiraEm, criadoEm
 
-encomendas
+pedidos
 ├── id, referencia    (AD-XXXXXX)
 ├── clienteId, estado, subtotalCents, totalCents
-├── moradaEnvio, metodoEnvio, codigoSeguimento
+├── endereçoEnvio, metodoEnvio, codigoSeguimento
 ├── notasInternas, origemVenda   (site | visita | whatsapp)
 ├── criadoEm, atualizadoEm
 
-encomenda_itens
-├── encomendaId, produtoId
+pedido_itens
+├── pedidoId, produtoId
 ├── nomeProduto, tamanho, cor      (congelados no momento da compra)
 ├── quantidade, precoUnitarioCents
 
-encomenda_eventos     Linha do tempo auditável
-├── encomendaId, estadoAnterior, estadoNovo
+pedido_eventos     Linha do tempo auditável
+├── pedidoId, estadoAnterior, estadoNovo
 ├── autorId, nota, criadoEm
 
 notas
 ├── id, autorId, titulo, conteudo
 ├── etiquetas[], fixada, arquivada
-├── clienteId?, encomendaId?       (ligações opcionais)
+├── clienteId?, pedidoId?       (links opcionais)
 
 visita_registos       Preenchido após a visita
 ├── agendamentoId, pecasProvadas[]
 ├── pecasCompradas[], observacoes
-├── proximoContactoEm
+├── proximoContatoEm
 
 recomendacoes
 ├── codigo, clienteOrigemId, clienteDestinoId?
 ├── estado, descontoAplicado, criadoEm
 
 metricas_diarias      Pré-agregado para os gráficos
-├── data, receitaCents, numEncomendas
+├── data, receitaCents, numPedidos
 ├── numVisitas, numVisitasConvertidas
 ├── novasClientes, clientesRecorrentes
 ```
 
-**Nota sobre `encomenda_itens`:** o nome, tamanho, cor e preço ficam
+**Nota sobre `pedido_itens`:** o nome, tamanho, cor e preço ficam
 **congelados** no momento da compra. Se a peça mudar de preço ou for
-descontinuada, a encomenda antiga continua a mostrar o que foi realmente
-vendido. Encomendas são registo histórico, não vista sobre o catálogo.
+descontinuada, a pedido antiga continua a mostrar o que foi realmente
+vendido. Pedidos são registo histórico, não vista sobre o catálogo.
 
 **Nota sobre `metricas_diarias`:** calcular receita de 12 semanas somando
-encomendas a cada carregamento fica lento depressa. Um trabalho nocturno
+pedidos a cada carregamento fica lento depressa. Um trabalho nocturno
 pré-agrega. Os gráficos lêem daqui.
 
 ---
@@ -640,18 +640,18 @@ dependem de nada.
 
 ### Fase 2 — Painel, núcleo (2 a 3 semanas)
 
-7. Tabelas `utilizadores` e `sessoes_admin` + Auth.js
+7. Tabelas `usuários` e `sessoes_admin` + Auth.js
 8. Rota secreta, middleware, 404 para URL errada
-9. Ecrã "Hoje"
+9. Tela "Hoje"
 10. Agenda de visitas
 11. Bloco de notas
 
-**Porquê antes das encomendas:** as visitas já existem e são hoje geridas de
+**Porquê antes das pedidos:** as visitas já existem e são hoje geridas de
 cabeça. É onde o painel alivia mais depressa.
 
-### Fase 3 — Encomendas (2 semanas)
+### Fase 3 — Pedidos (2 semanas)
 
-12. Tabelas de encomendas e eventos
+12. Tabelas de pedidos e eventos
 13. Lista, ficha e mudança de estado
 14. Mensagens de WhatsApp preparadas por estado
 15. Exportação CSV
@@ -688,7 +688,7 @@ cabeça. É onde o painel alivia mais depressa.
 | Risco | Mitigação |
 |---|---|
 | **URL secreta partilhada por engano** | O login é a defesa real. Rotação em 30 segundos. |
-| **Palavra-passe fraca** | Mínimo 12 caracteres, verificação contra lista de senhas comuns |
+| **Senha fraca** | Mínimo 12 caracteres, verificação contra lista de senhas comuns |
 | **Painel lento com o crescimento** | Paginação desde o início; métricas pré-agregadas |
 | **Sugestões de marketing irrelevantes** | Nenhuma sugestão genérica; só derivadas de dados. Se não há dados, não há sugestão. |
 | **Excesso de automatismo** | Nada é enviado sem confirmação humana |
@@ -722,10 +722,10 @@ cabeça. É onde o painel alivia mais depressa.
 |---|---|
 | Homepage acolhedora | Terracota e pêssego, sombras quentes, voz na 1.ª pessoa, testemunhos, FAQ |
 | Painel oculto por URL secreta | `ADMIN_PATH` em variável de ambiente + 404 para URL errada |
-| Login e-mail/palavra-passe | Auth.js + Argon2id + trava de tentativas + sessão de 8h |
+| Login e-mail/senha | Auth.js + Argon2id + trava de tentativas + sessão de 8h |
 | Notas do vendedor | Cartões, etiquetas, fixar, tarefas, guardar automático |
 | Gestão de pedidos | 7 estados, linha do tempo auditável, WhatsApp por estado, CSV |
 | Gráficos e estatísticas | 5 indicadores + 6 gráficos + recompra a 90 dias |
 | Sugestões de crescimento | Motor de oportunidades sobre dados reais + recomendações + modelos |
-| Serviço ao domicílio | Página própria, faixa na homepage, "como é uma visita", grupo, registo pós-visita |
-| Facilidade de uso | "Hoje" como ecrã inicial, urgência antes de cronologia, nada automático sem confirmação |
+| Serviço em domicílio | Página própria, faixa na homepage, "como é uma visita", grupo, registo pós-visita |
+| Facilidade de uso | "Hoje" como tela inicial, urgência antes de cronologia, nada automático sem confirmação |

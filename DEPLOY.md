@@ -21,7 +21,7 @@ um deploy não deve ficar em branco por causa de uma variável em falta.
 Quando estiver pronta, em **Settings → Environment Variables**:
 
 ```
-NEXT_PUBLIC_WHATSAPP=351912345678   ← o mais importante: o número real
+NEXT_PUBLIC_WHATSAPP=5531988887777   ← o mais importante: o número real
 NEXT_PUBLIC_SITE_URL=https://o-seu-dominio.vercel.app
 DATABASE_URL=postgres://…           ← Neon
 DB_DRIVER=neon
@@ -33,7 +33,7 @@ CRON_SECRET=                        ← openssl rand -hex 32
 ## Serviços externos
 
 A Vercel corre funções sem estado, por isso a base de dados e o Redis têm de
-falar por HTTP — ligações TCP persistentes não sobrevivem entre invocações.
+falar por HTTP — links TCP persistentes não sobrevivem entre invocações.
 
 | Serviço | Onde | Variáveis |
 |---|---|---|
@@ -57,9 +57,9 @@ DATABASE_URL="a-sua-url" npm run db:seed
 própria API, o que funciona em dev mas parte no build: durante a geração
 estática não há servidor a ouvir. RSC e Route Handler correm no mesmo
 processo — pedir por HTTP a nós próprios só somava latência e um ponto de
-falha. A API em `/api` continua a servir o browser e terceiros.
+falha. A API em `/api` continua a servir o navegador e terceiros.
 
-**A ligação à base de dados é preguiçosa.** Só se abre na primeira query;
+**A link à base de dados é preguiçosa.** Só se abre na primeira query;
 importar o módulo durante o build não exige `DATABASE_URL`.
 
 **Prometheus e Grafana não se aplicam na Vercel** — `/metrics` pressupõe um
@@ -73,9 +73,9 @@ continuam válidos para autoalojamento.
 
 ## Como funciona
 
-Usamos apenas `wa.me`, o deep link oficial: abre a app no telemóvel e o
+Usamos apenas `wa.me`, o deep link oficial: abre a app no celular e o
 WhatsApp Web no desktop. **Sem SDK, sem cookies de terceiros, zero bytes
-extra no bundle.** A mensagem vai pré-escrita — a cliente carrega em enviar.
+extra no bundle.** A mensagem vai pré-escrita — a cliente clica em enviar.
 Nunca enviamos nada em nome dela.
 
 ## Onde aparece
@@ -83,11 +83,11 @@ Nunca enviamos nada em nome dela.
 **Partilha**
 - Botão discreto no canto de cada cartão de produto (visível no hover, sempre
   visível no toque)
-- Botão completo na página de produto, com menu de "copiar ligação"
-- No telemóvel usa `navigator.share` — a folha nativa do sistema, que é
+- Botão completo na página de produto, com menu de "copiar link"
+- No celular usa `navigator.share` — a folha nativa do sistema, que é
   sempre melhor do que um menu nosso
 
-**Marcação**
+**Agendamento**
 - Botão flutuante em todas as páginas, a partir de 600 px de scroll
 - CTA secundário no hero e na secção do serviço
 - Bloco "caminho mais curto" na página `/agendar`: nome + cidade + formato
@@ -102,7 +102,7 @@ muda é o fim do fluxo: em vez de esperar por um e-mail, a conversa abre já.
 
 O bloco rápido faz o mesmo com menos atrito — grava a intenção no Redis com
 TTL de 7 dias e devolve a conversa pronta. Se a pré-reserva falhar por
-alguma razão, **a conversa abre na mesma**: nunca bloqueamos um contacto por
+alguma razão, **a conversa abre na mesma**: nunca bloqueamos um contato por
 causa de um erro nosso.
 
 ## O tom das mensagens
@@ -113,7 +113,7 @@ A partilha é escrita na primeira pessoa de quem partilha:
 
 Não *"descubra a nossa coleção"*. Ninguém reencaminha anúncios para amigas.
 
-A marcação é estruturada para a consultora responder numa só mensagem, sem
+A agendamento é estruturada para a consultora responder numa só mensagem, sem
 cinco perguntas de seguimento:
 
 > Olá! Gostaria de marcar uma consulta.
@@ -121,7 +121,7 @@ cinco perguntas de seguimento:
 > Chamo-me *Marta*.
 > Prefiro: prova em minha casa.
 > Dia pretendido: sexta-feira, 14 de agosto, às 15:30.
-> Cidade: Barreiro.
+> Cidade: Nova Lima.
 >
 > Referência da pré-reserva: *AD-K7M2PQ*
 

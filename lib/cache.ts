@@ -6,7 +6,7 @@ import { Ratelimit } from '@upstash/ratelimit';
  * onde sockets TCP persistentes não existem.
  *
  * `Redis.fromEnv()` atira uma exceção quando as variáveis não estão definidas
- * — e como isso acontecia no topo do módulo, bastava importar este ficheiro
+ * — e como isso acontecia no topo do módulo, bastava importar este arquivo
  * durante o build da Vercel para o deploy falhar. Agora a criação é preguiçosa
  * e, sem Redis configurado, o sistema continua a servir: perde-se a cache e o
  * rate limit, não o site.

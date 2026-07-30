@@ -42,7 +42,7 @@ export function Hero() {
           className="mt-10 max-w-lg text-lg leading-relaxed text-carvao/75"
         >
           Seda italiana, renda de Caudry e algodão Pima — escolhidos um a um.
-          E a Ana, que vai a sua casa com as provas na mala, para que nunca
+          E a Ana, que vai sua casa com as provas na mala, para que nunca
           mais tenha de adivinhar o seu tamanho.
         </motion.p>
 
@@ -77,7 +77,7 @@ export function Hero() {
           {[
             ['90 min', 'de consulta, sem compromisso'],
             ['1 200+', 'clientes vestidas à medida'],
-            ['6 cidades', 'com prova ao domicílio'],
+            ['6 cidades', 'com atendimento em domicílio'],
           ].map(([n, t]) => (
             <div key={n}>
               <dt className="display text-3xl text-bordeaux">{n}</dt>

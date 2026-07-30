@@ -1,7 +1,7 @@
 {
   "title": "A Dona Lingerie · Visão Geral",
   "uid": "adona-geral",
-  "timezone": "Europe/Lisbon",
+  "timezone": "America/Sao_Paulo",
   "refresh": "30s",
   "time": { "from": "now-6h", "to": "now" },
   "panels": [

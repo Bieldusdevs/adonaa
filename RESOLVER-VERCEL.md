@@ -1,6 +1,6 @@
 # Resolver o erro do deploy
 
-## O que está a acontecer
+## O que está acontecendo
 
 ```
 npm error Unsupported URL Type "workspace:": workspace:*
@@ -8,22 +8,22 @@ npm error Unsupported URL Type "workspace:": workspace:*
 
 `workspace:*` é sintaxe de monorepo (Bun/pnpm). O npm não a entende.
 
-**Esse texto não existe em nenhum ficheiro do projeto atual** — verifiquei.
+**Esse texto não existe em nenhum arquivo do projeto atual** — verifiquei.
 Ele está no `package.json` **antigo**, que continua no seu repositório do
 GitHub.
 
 A causa é sempre a mesma: **o upload web do GitHub acrescenta e substitui
-ficheiros, mas nunca apaga os que já lá estavam.** O repositório tem a
+arquivos, mas nunca apaga os que já lá estavam.** O repositório tem a
 estrutura nova por cima e os restos da antiga por baixo.
 
 Houve progresso, note-se: o `npm install` do `vercel.json` foi lido, o
-`turbo` já não é invocado. Falta só limpar os ficheiros velhos.
+`turbo` já não é invocado. Falta só limpar os arquivos velhos.
 
 ---
 
 ## A solução: apagar o repositório e criar um novo
 
-É mais rápido e mais fiável do que caçar ficheiros antigos um a um.
+É mais rápido e mais fiável do que caçar arquivos antigos um a um.
 
 ### 1. Apagar o repositório atual
 
@@ -38,7 +38,7 @@ GitHub → o seu repositório → **Settings** → descer até ao fim →
 - **Não** marque *Add a README*
 - **Não** adicione .gitignore nem licença
 
-### 3. Enviar os ficheiros
+### 3. Enviar os arquivos
 
 Use a pasta **`enviar-para-github`** que preparei — contém exatamente o que
 deve ir, e nada mais.
@@ -55,7 +55,7 @@ README.md  DEPLOY.md  GITHUB.md  RESOLVER-VERCEL.md
 
 > Arraste o **conteúdo** da pasta, não a pasta em si.
 
-São 54 ficheiros. Não há `node_modules`, `.next`, `apps/`, `packages/` nem
+São 54 arquivos. Não há `node_modules`, `.next`, `apps/`, `packages/` nem
 `turbo.json` — foi por isso que preparei essa pasta em separado.
 
 ### 4. Na Vercel
@@ -78,7 +78,7 @@ cd a-dona-lingerie
 ./limpar-e-publicar.sh https://github.com/SEU-USER/SEU-REPO.git
 ```
 
-Cria um histórico novo e faz `push --force`. Os ficheiros antigos
+Cria um histórico novo e faz `push --force`. Os arquivos antigos
 desaparecem porque o histórico inteiro é substituído.
 
 ---
@@ -92,7 +92,7 @@ Abra o `package.json` no GitHub. A primeira dependência deve ser:
   "next": "15.5.22",
 ```
 
-Se vir `"workspace:*"` ou `"@adona/db"`, é o ficheiro antigo — o upload não
+Se vir `"workspace:*"` ou `"@adona/db"`, é o arquivo antigo — o upload não
 o substituiu.
 
 No log do deploy deve aparecer:
@@ -112,11 +112,11 @@ E **não** deve aparecer: `Detected Turbo`, `workspace:`, `--prefix=../..`.
 **Settings → Environment Variables:**
 
 ```
-NEXT_PUBLIC_WHATSAPP = 351912345678
+NEXT_PUBLIC_WHATSAPP = 5531988887777
 ```
 
 Só dígitos, com indicativo, sem `+`. Depois **Redeploy**.
 
 O site funciona mesmo sem base de dados: mostra o catálogo de demonstração e
-o formulário de marcação encaminha para o WhatsApp. Configure Neon e Upstash
+o formulário de agendamento encaminha para o WhatsApp. Configure Neon e Upstash
 quando quiser — ver `DEPLOY.md`.

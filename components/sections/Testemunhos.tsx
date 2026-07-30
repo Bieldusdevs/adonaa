@@ -17,23 +17,23 @@ import { motion } from 'motion/react';
 const TESTEMUNHOS = [
   {
     texto:
-      'Usei o mesmo tamanho durante doze anos. Estava errado. A Ana mediu-me em cinco minutos na minha própria sala e percebi porque é que nada me assentava bem.',
+      'Usei o mesmo tamanho durante doze anos. Estava errado. A Ana mediu-me em cinco minutos na minha própria sala e percebi porque é que nada me caiva bem.',
     nome: 'Marta',
-    cidade: 'Barreiro',
+    cidade: 'Nova Lima',
     contexto: 'Prova em casa',
   },
   {
     texto:
-      'Confesso que a ideia de receber alguém em casa para isto me deixava desconfortável. Passou nos primeiros dois minutos. Foi como estar com uma amiga que percebe muito de tecidos.',
+      'Confesso que a ideia de receber alguém em casa para isto me deixava desconfortável. Passou nos primeiros dois minutos. Foi como estar com uma amiga que entende muito de tecidos.',
     nome: 'Rita',
-    cidade: 'Lisboa',
+    cidade: 'Belo Horizonte',
     contexto: 'Prova em casa',
   },
   {
     texto:
       'Não levei nada na primeira visita e ninguém me fez sentir mal por isso. Voltei duas semanas depois e comprei três conjuntos.',
     nome: 'Sofia',
-    cidade: 'Almada',
+    cidade: 'Contagem',
     contexto: 'Cliente desde 2024',
   },
 ];

@@ -8,11 +8,11 @@ import { SilkCloth } from './SilkCloth';
 /**
  * Camada 3D do hero.
  *
- * Estratégia de desempenho e respeito pelo utilizador:
+ * Estratégia de desempenho e respeito pelo usuário:
  *  1. Só monta depois do primeiro paint (não atrasa o LCP).
  *  2. Desliga-se com `prefers-reduced-motion`.
- *  3. Malha reduzida no telemóvel; DPR adaptativo.
- *  4. `frameloop="demand"` fora do ecrã via IntersectionObserver.
+ *  3. Malha reduzida no celular; DPR adaptativo.
+ *  4. `frameloop="demand"` fora do tela via IntersectionObserver.
  */
 export function CenaHero() {
   const [pronto, setPronto] = useState(false);

@@ -16,13 +16,13 @@ export const CATALOGO_EXEMPLO: Produto[] = [
     slug: 'conjunto-aurora-seda',
     nome: 'Conjunto Aurora',
     colecao: 'Alvorada',
-    resumo: 'Soutien sem aro e caleçon em seda amoreira com acabamento em renda Chantilly.',
+    resumo: 'Sutiã sem aro e calcinha em seda amoreira com acabamento em renda Chantilly.',
     descricao:
-      'Cortado em viés para acompanhar o movimento do corpo. O soutien dispensa aro: a sustentação vem da modelagem em três painéis e de uma faixa inferior larga e macia. Sem etiquetas — a numeração é impressa a laser no interior.',
+      'Cortado em viés para acompanhar o movimento do corpo. O sutiã dispensa aro: a sustentação vem da modelagem em três painéis e de uma faixa inferior larga e macia. Sem etiquetas — a numeração é impressa a laser no interior.',
     historia:
       'Nasceu de um pedido: uma cliente queria uma peça que pudesse usar sob um vestido de casamento e continuar a usar dez anos depois.',
     precoCents: 24900,
-    moeda: 'EUR',
+    moeda: 'BRL',
     cores: [
       { nome: 'Marfim', hex: '#F3EAE0' },
       { nome: 'Pérola nua', hex: '#E4CFC2' },
@@ -47,7 +47,7 @@ export const CATALOGO_EXEMPLO: Produto[] = [
     historia:
       'Uma homenagem aos teares Leavers de Caudry, onde cada metro leva cerca de uma hora a nascer.',
     precoCents: 28900,
-    moeda: 'EUR',
+    moeda: 'BRL',
     cores: [
       { nome: 'Preto tinta', hex: '#14110F' },
       { nome: 'Bordeaux', hex: '#5A1F2B' },
@@ -72,7 +72,7 @@ export const CATALOGO_EXEMPLO: Produto[] = [
     historia:
       'A peça que as nossas clientes recompram mais vezes — normalmente em três cores de uma vez.',
     precoCents: 15900,
-    moeda: 'EUR',
+    moeda: 'BRL',
     cores: [
       { nome: 'Rosa areia', hex: '#E8C7BE' },
       { nome: 'Areia', hex: '#D8C3AE' },

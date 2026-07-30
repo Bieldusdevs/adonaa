@@ -10,7 +10,7 @@ export const agendamentosRoute = new Hono();
 
 const DURACAO_MIN = 90;
 const HORARIOS = ['10:00', '11:30', '14:00', '15:30', '17:00', '18:30'];
-const CIDADES = ['Lisboa', 'Barreiro', 'Almada', 'Setúbal', 'Cascais', 'Porto'];
+const CIDADES = ['Belo Horizonte', 'Nova Lima', 'Contagem', 'Betim', 'Sabará', 'Santa Luzia'];
 
 /* --------------------------- disponibilidade --------------------------- */
 agendamentosRoute.get('/disponibilidade', async (c) => {
@@ -25,7 +25,7 @@ agendamentosRoute.get('/disponibilidade', async (c) => {
    * Sem base de dados, mostramos a agenda toda livre em vez de falhar.
    * A confirmação humana acontece sempre a seguir — por e-mail ou WhatsApp —
    * portanto um horário mostrado a mais custa muito menos do que um
-   * formulário de marcação que não abre.
+   * formulário de agendamento que não abre.
    */
   let tomados = new Set<string>();
 
@@ -57,10 +57,10 @@ agendamentosRoute.get('/disponibilidade', async (c) => {
   return c.json(payload);
 });
 
-/* ------------------------------ marcação ------------------------------- */
+/* ------------------------------ agendamento ------------------------------- */
 const agendarSchema = z
   .object({
-    nome: z.string().min(2, 'Diga-nos como a devemos tratar'),
+    nome: z.string().min(2, 'Como podemos te chamar?'),
     email: z.string().email('E-mail inválido'),
     telefone: z.string().min(9).max(20),
     tipo: z.enum(['domicilio', 'atelier', 'video']).default('domicilio'),
@@ -68,7 +68,7 @@ const agendarSchema = z
     hora: z.enum(HORARIOS as [string, ...string[]]),
     endereco: z.string().min(5).optional(),
     cidade: z.string().optional(),
-    codigoPostal: z.string().optional(),
+    cep: z.string().optional(),
     observacoes: z.string().max(1000).optional(),
     /** Canal preferido para a confirmação. */
     canal: z.enum(['email', 'whatsapp']).default('email'),
@@ -77,7 +77,7 @@ const agendarSchema = z
     }),
   })
   .refine((d) => d.tipo !== 'domicilio' || (!!d.endereco && !!d.cidade), {
-    message: 'Para a prova em casa precisamos da morada e da cidade',
+    message: 'Para a prova em casa precisamos da endereço e da cidade',
     path: ['endereco'],
   });
 
@@ -90,13 +90,13 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
   const inicioEm = new Date(`${d.data}T${d.hora}:00Z`);
 
   if (inicioEm.getTime() < Date.now() + 24 * 3600 * 1000) {
-    return c.json({ erro: 'As marcações exigem 24 horas de antecedência.' }, 422);
+    return c.json({ erro: 'As agendamentos exigem 24 horas de antecedência.' }, 422);
   }
 
   const referencia = gerarReferencia();
 
   /**
-   * Sem base de dados configurada, a marcação não se perde: devolvemos a
+   * Sem base de dados configurada, a agendamento não se perde: devolvemos a
    * referência e a conversa de WhatsApp pronta. A cliente conclui por lá.
    */
   if (!temBaseDeDados()) {
@@ -108,7 +108,7 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
           nome: d.nome, tipo: d.tipo, data: d.data, hora: d.hora,
           cidade: d.cidade, referencia,
         }),
-        mensagem: 'Recebemos o seu pedido. Confirme os detalhes com a sua consultora por WhatsApp.',
+        mensagem: 'Recebemos o seu pedido. Confirme os detalhes com sua consultora por WhatsApp.',
       },
       201,
     );
@@ -135,7 +135,7 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
         duracaoMin: DURACAO_MIN,
         endereco: d.endereco,
         cidade: d.cidade,
-        codigoPostal: d.codigoPostal,
+        cep: d.cep,
         observacoes: d.observacoes
           ? `${d.observacoes}\n\n[ref ${referencia} · canal ${d.canal}]`
           : `[ref ${referencia} · canal ${d.canal}]`,
@@ -151,7 +151,7 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
 
     /**
      * Devolvemos também o link de WhatsApp já preenchido com a referência.
-     * Quem escolheu esse canal salta direto para a conversa — a marcação
+     * Quem escolheu esse canal salta direto para a conversa — a agendamento
      * já ficou registada, o WhatsApp é só a confirmação humana.
      */
     return c.json(
@@ -169,8 +169,8 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
         }),
         mensagem:
           d.canal === 'whatsapp'
-            ? 'Pedido registado. Abra a conversa para falar já com a sua consultora.'
-            : 'Recebemos o seu pedido. A sua consultora entrará em contacto em até 4 horas para confirmar.',
+            ? 'Pedido registado. Abra a conversa para falar já com sua consultora.'
+            : 'Recebemos o seu pedido. A sua consultora entrará em contato em até 4 horas para confirmar.',
       },
       201,
     );
@@ -184,7 +184,7 @@ agendamentosRoute.post('/', zValidator('json', agendarSchema), async (c) => {
 
 /* --------------------------- pré-reserva WhatsApp ---------------------- *
  * Fluxo curto: a cliente só dá o nome (ou nem isso) e segue para a conversa.
- * Guardamos a intenção para a equipa saber de onde veio o contacto e para
+ * Guardamos a intenção para a equipa saber de onde veio o contato e para
  * medir a conversão do canal — sem obrigar ninguém a preencher um formulário.
  * ----------------------------------------------------------------------- */
 const preReservaSchema = z.object({

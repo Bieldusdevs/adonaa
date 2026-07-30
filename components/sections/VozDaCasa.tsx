@@ -32,7 +32,7 @@ export function VozDaCasa() {
 
           <blockquote className="space-y-6 text-lg leading-relaxed text-carvao/80">
             <p>
-              Comecei porque me fartei de ver mulheres a usar o tamanho errado
+              Comecei porque me cansei de ver mulheres a usar o tamanho errado
               e a acharem que o problema eram elas.
             </p>
             <p>
@@ -40,7 +40,7 @@ export function VozDaCasa() {
               pedir outro tamanho. Nada disso tem a ver com o corpo de ninguém.
             </p>
             <p>
-              Por isso vou a sua casa: ao seu espelho, à sua luz, no seu tempo.
+              Por isso vou sua casa: no seu espelho, na sua luz, no seu tempo.
               Levo a mala, levo a fita métrica e levo paciência. O resto
               fazemos juntas.
             </p>
@@ -48,7 +48,7 @@ export function VozDaCasa() {
 
           <p className="display mt-10 text-2xl text-bordeaux italic">Ana</p>
           <p className="mt-1 text-xs tracking-wider text-carvao/50 uppercase">
-            Fundadora · Ateliê no Príncipe Real, Lisboa
+            Fundadora · Ateliê na Savassi, Belo Horizonte
           </p>
         </div>
       </div>
